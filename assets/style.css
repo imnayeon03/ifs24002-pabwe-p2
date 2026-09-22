@@ -1,0 +1,591 @@
+/* =========================================================
+   VERYA AI — LANDING PAGE STYLESHEET
+   Studi kasus 3.1 — HTML + CSS murni (tanpa framework)
+   ========================================================= */
+
+/* ---------- 1. CSS VARIABLES ---------- */
+:root {
+  /* Warna dasar */
+  --ink: #15181c;
+  --ink-soft: #4b5259;
+  --ink-faint: #5a6067;
+
+  --paper: #eef0ee;
+  --paper-raised: #f8f9f8;
+  --paper-deep: #e2e6e3;
+
+  --line: #d3d8d5;
+
+  --accent: #c98a2c;
+  --accent-deep: #6b4712;
+  --accent-soft: #f3e6d1;
+
+  /* Tipografi */
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  /* Layout */
+  --container: 1160px;
+  --radius: 6px;
+  --radius-lg: 14px;
+}
+
+/* ---------- 2. RESET / UNIVERSAL SELECTOR ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul, figure {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- 3. CONTAINER ---------- */
+.container {
+  width: min(100% - 40px, var(--container));
+  margin-inline: auto;
+}
+
+section {
+  padding-block: clamp(56px, 8vw, 104px);
+}
+
+.section-head {
+  max-width: 620px;
+  margin-bottom: 48px;
+}
+
+.section-tag {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  background: var(--paper-raised);
+}
+
+.section-head h2 {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  margin-bottom: 14px;
+}
+
+.section-head p {
+  color: var(--ink-soft);
+  font-size: 1.02rem;
+}
+
+/* ---------- 4. HEADER / NAVBAR (Flexbox) ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(238, 240, 238, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 76px;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.brand-mark {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.brand-mark circle,
+.brand-mark line {
+  stroke: var(--accent);
+}
+
+.brand span {
+  color: var(--accent-deep);
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-menu a {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  transition: color 0.2s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.is-active {
+  color: var(--ink);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Menu mobile — checkbox hack, tanpa JavaScript */
+.nav-toggle-input {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.nav-toggle-label span {
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+}
+
+/* ---------- 5. BUTTONS ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding-inline: 22px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn-primary:hover {
+  background: var(--accent-deep);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-outline:hover {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  min-height: 38px;
+  padding-inline: 16px;
+  font-size: 0.85rem;
+}
+
+/* ---------- 6. HERO (Grid) ---------- */
+.hero {
+  padding-block: clamp(56px, 9vw, 120px);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+  align-items: center;
+  gap: 60px;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent-deep);
+}
+
+.hero-eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero h1 {
+  max-width: 620px;
+  margin-bottom: 22px;
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+}
+
+.hero-description {
+  max-width: 480px;
+  margin-bottom: 30px;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+
+.hero-stats strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+}
+
+.hero-stats span {
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+}
+
+/* Diagram graf (SVG) — pengganti ilustrasi generik */
+.hero-graph {
+  position: relative;
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+}
+
+.hero-graph svg {
+  width: 100%;
+  height: auto;
+}
+
+.hero-graph circle {
+  fill: var(--paper-raised);
+  stroke: var(--ink-faint);
+}
+
+.hero-graph circle.node-active {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+}
+
+.hero-graph line {
+  stroke: var(--line);
+  stroke-width: 1.4;
+}
+
+/* ---------- 7. LAYANAN — CARD GRID ---------- */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.service-card {
+  padding: 34px 30px;
+  background: var(--paper-raised);
+  transition: background 0.2s ease;
+}
+
+.service-card:hover {
+  background: var(--paper-deep);
+}
+
+.service-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--accent-deep);
+}
+
+.service-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.service-card p {
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+}
+
+/* ---------- 8. TENTANG (Flexbox, alternating layout) ---------- */
+.about {
+  background: var(--paper-raised);
+  border-block: 1px solid var(--line);
+}
+
+.about .container {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.about-list {
+  display: grid;
+  gap: 22px;
+  margin-top: 8px;
+}
+
+.about-item {
+  display: flex;
+  gap: 16px;
+  padding-block: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.about-item:first-child {
+  border-top: none;
+}
+
+.about-item strong {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-display);
+}
+
+.about-item p {
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+}
+
+.about-number {
+  font-family: var(--font-mono);
+  color: var(--accent-deep);
+  font-size: 0.9rem;
+}
+
+/* ---------- 9. KONTAK — FORM ---------- */
+.contact .container {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 64px;
+}
+
+.contact-info h2 {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  margin-bottom: 16px;
+}
+
+.contact-info p {
+  color: var(--ink-soft);
+  margin-bottom: 28px;
+}
+
+.contact-detail {
+  display: grid;
+  gap: 14px;
+  font-size: 0.95rem;
+}
+
+.contact-detail li {
+  display: flex;
+  gap: 10px;
+  color: var(--ink-soft);
+}
+
+.contact-form {
+  display: grid;
+  gap: 18px;
+  padding: 34px;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.form-row {
+  display: grid;
+  gap: 8px;
+}
+
+.form-row label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.form-row input,
+.form-row textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.form-row input::placeholder,
+.form-row textarea::placeholder {
+  color: var(--ink-faint);
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ---------- 10. FOOTER ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding-block: 40px;
+}
+
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.footer-links a:hover {
+  color: var(--ink);
+}
+
+.footer-note {
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+}
+
+/* ---------- 11. RESPONSIVE (MEDIA QUERY) ---------- */
+@media (max-width: 860px) {
+  .nav-menu,
+  .nav-actions .btn-outline {
+    display: none;
+  }
+
+  .nav-toggle-label {
+    display: flex;
+  }
+
+  .nav-toggle-input:checked ~ .navbar-mobile-menu {
+    display: flex;
+  }
+
+  .navbar-mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    padding-block: 16px;
+    border-top: 1px solid var(--line);
+  }
+
+  .navbar-mobile-menu a {
+    padding: 10px 4px;
+    color: var(--ink-soft);
+  }
+
+  .hero .container,
+  .about .container,
+  .contact .container {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-graph {
+    order: -1;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-stats {
+    flex-wrap: wrap;
+    row-gap: 16px;
+  }
+}
